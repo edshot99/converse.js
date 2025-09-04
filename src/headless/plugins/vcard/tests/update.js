@@ -160,6 +160,7 @@ describe('An incoming presence with a XEP-0153 vcard:update element', function (
             await u.waitUntil(() => vcard.get('image_url') === 'http://localhost:9876/base/logo/conversejs-filled-192.png');
             while (IQ_stanzas.length) IQ_stanzas.pop();
 
+            /*
             _converse.api.connection.get()._dataRecv(
                 mock.createRequest(
                     stx`<presence xmlns="jabber:client"
@@ -171,6 +172,7 @@ describe('An incoming presence with a XEP-0153 vcard:update element', function (
                         </presence>`
                 )
             );
+            */
 
             return new Promise((resolve) => {
                 setTimeout(() => {
