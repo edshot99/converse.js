@@ -110,7 +110,7 @@ describe('An incoming presence with a XEP-0153 vcard:update element', function (
                                 to="${_converse.session.get('jid')}"
                                 from="${contact_jid}/resource">
                             <x xmlns='vcard-temp:x:update'>
-                                <photo></photo>
+                                <photo>123</photo>
                             </x>
                         </presence>`
                 )
@@ -159,6 +159,18 @@ describe('An incoming presence with a XEP-0153 vcard:update element', function (
             const { vcard } = await api.contacts.get(contact_jid);
             await u.waitUntil(() => vcard.get('image_url') === 'http://localhost:9876/base/logo/conversejs-filled-192.png');
             while (IQ_stanzas.length) IQ_stanzas.pop();
+
+            _converse.api.connection.get()._dataRecv(
+                mock.createRequest(
+                    stx`<presence xmlns="jabber:client"
+                                to="${_converse.session.get('jid')}"
+                                from="${contact_jid}/resource">
+                            <x xmlns='vcard-temp:x:update'>
+                                <photo>123</photo>
+                            </x>
+                        </presence>`
+                )
+            );
 
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -242,6 +254,7 @@ describe('An incoming presence with a XEP-0153 vcard:update element', function (
                                 to="${_converse.session.get('jid')}"
                                 from="${contact_jid}/resource">
                             <x xmlns='vcard-temp:x:update'>
+                                <photo></photo>
                             </x>
                         </presence>`
                 )
@@ -350,6 +363,7 @@ describe('An incoming presence with a XEP-0153 vcard:update element', function (
                                 to="${_converse.session.get('jid')}"
                                 from="${contact_jid}/resource">
                             <x xmlns='vcard-temp:x:update'>
+                                <photo></photo>
                             </x>
                         </presence>`
                 )
